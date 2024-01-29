@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RestaurantItem from './RestaurantItem';
 import { Link } from 'react-router-dom';
-import { FaSpinner } from 'react-icons/fa'; 
+import { FaSpinner } from 'react-icons/fa';
 
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -25,6 +25,16 @@ const RestaurantList = () => {
     }
   };
 
+  const handleRestaurantUpdate = () => {
+    // Callback to update restaurant list after an update
+    fetchRestaurants();
+  };
+
+  const handleRestaurantDelete = () => {
+    // Callback to update restaurant list after a deletion
+    fetchRestaurants();
+  };
+
   return (
     <div>
       <h1>Pizza Restaurants</h1>
@@ -33,7 +43,11 @@ const RestaurantList = () => {
       <ul>
         {restaurants.map((restaurant) => (
           <Link to={`/restaurant/${restaurant.id}`} key={restaurant.id}>
-            <RestaurantItem restaurant={restaurant} />
+            <RestaurantItem
+              restaurant={restaurant}
+              onRestaurantUpdate={handleRestaurantUpdate}
+              onRestaurantDelete={handleRestaurantDelete}
+            />
           </Link>
         ))}
       </ul>

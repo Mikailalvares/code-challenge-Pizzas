@@ -3,7 +3,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import RestaurantList from './components/RestaurantList';
 import Pizzas from './components/Pizzas';
-import './App.css'
+import RestaurantDetail from './components/RestaurantDetail';
+import './App.css';
+
 const App = () => {
   return (
     <Router>
@@ -25,6 +27,7 @@ const App = () => {
         <Routes>
           <Route path="/restaurants" element={<RestaurantList />} />
           <Route path="/pizzas" element={<Pizzas />} />
+          <Route path="/restaurant/:id" element={<RestaurantDetail />} />
         </Routes>
       </div>
     </Router>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const RestaurantItem = ({ restaurant }) => {
+const RestaurantItem = ({ restaurant, onRestaurantUpdate, onRestaurantDelete }) => {
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     name: restaurant.name,
@@ -24,17 +24,17 @@ const RestaurantItem = ({ restaurant }) => {
     try {
       await axios.put(`http://localhost:5000/restaurants/${restaurant.id}`, formData);
       setEditMode(false);
-      // You may want to fetch the updated restaurant list after a successful update
+      onRestaurantUpdate(); // Callback to update restaurant list
     } catch (error) {
       console.error('Error updating restaurant:', error);
-      // Handle error appropriately
+      
     }
   };
 
   const handleDeleteRestaurant = async () => {
     try {
       await axios.delete(`http://localhost:5000/restaurants/${restaurant.id}`);
-      // You may want to fetch the updated restaurant list after a successful deletion
+      onRestaurantDelete(); // Callback to update restaurant list
     } catch (error) {
       console.error('Error deleting restaurant:', error);
       // Handle error appropriately
